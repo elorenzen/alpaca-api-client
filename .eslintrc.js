@@ -50,6 +50,9 @@ module.exports = {
   // add your custom rules here
   rules: {
     'no-param-reassign': 'off',
+    'space-before-function-paren': 'off',
+    'comma-dangle': 'off',
+    'semi': 'off',
 
     'import/first': 'off',
     'import/named': 'error',
