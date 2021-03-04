@@ -53,6 +53,7 @@ module.exports = {
     'space-before-function-paren': 'off',
     'comma-dangle': 'off',
     'semi': 'off',
+    'no-console': 'off',
 
     'import/first': 'off',
     'import/named': 'error',
