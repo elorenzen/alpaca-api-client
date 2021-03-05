@@ -82,6 +82,7 @@
     </q-drawer>
 
     <q-page-container>
+      {{ accountData }}
       <router-view />
     </q-page-container>
   </q-layout>
@@ -89,6 +90,7 @@
 
 <script>
 export default {
+  props: ['accountData'],
   data () {
     return {
       leftDrawerOpen: false
