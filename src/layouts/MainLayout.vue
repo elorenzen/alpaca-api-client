@@ -82,15 +82,14 @@
     </q-drawer>
 
     <q-page-container>
-      {{ accountData }}
-      <router-view />
+      <router-view :accountData="accountData" :positions="positions" :orders="orders" />
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
 export default {
-  props: ['accountData'],
+  props: ['accountData', 'positions', 'orders'],
   data () {
     return {
       leftDrawerOpen: false
