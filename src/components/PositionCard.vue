@@ -38,20 +38,16 @@
       </q-item>
 
       <div class="q-px-lg">
-        <q-list padding class="row rounded-borders">
+        <q-list padding class="row rounded-borders text-black">
             <q-expansion-item
                 class="col"
                 dense
                 dense-toggle
                 expand-separator
-                icon="perm_identity"
-                label="Account settings"
+                icon="fas fa-chart-line"
+                label="Technical indicators"
             >
-                <q-card>
-                <q-card-section>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                </q-card-section>
-                </q-card>
+                RSI: {{ rsiData }}
             </q-expansion-item>
 
             <q-expansion-item
@@ -59,7 +55,7 @@
                 dense
                 dense-toggle
                 expand-separator
-                icon="signal_wifi_off"
+                icon="fas fa-receipt"
                 label="Order history"
             >
                 {{ orders }}
@@ -89,10 +85,11 @@ export default {
       console.log('assetData: ', this.assetData)
     },
     async getRSI () {
-      this.rsiData = await axios.get(
+      await axios.get(
         `https://www.alphavantage.co/query?function=RSI&symbol=${this.position.symbol}&interval=15min&time_period=5&series_type=open&apikey=${process.env.ALPHAVANTAGE_API_KEY}`
       ).then((response) => {
         console.log(response.data['Technical Analysis: RSI'])
+        this.rsiData = response.data['Technical Analysis: RSI']
       })
     }
   },
