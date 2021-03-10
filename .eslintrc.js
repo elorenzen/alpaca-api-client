@@ -54,6 +54,7 @@ module.exports = {
     'comma-dangle': 'off',
     'semi': 'off',
     'no-console': 'off',
+    'max-len': 'off',
 
     'import/first': 'off',
     'import/named': 'error',

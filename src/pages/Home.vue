@@ -1,8 +1,7 @@
 <template>
   <q-page class="flex flex-center">
     {{ accountData }}
-    {{ orders }}
-    <PositionsList :positions="positions" />
+    <PositionsList :positions="positions" :orders="orders" />
   </q-page>
 </template>
 

@@ -2,7 +2,12 @@
   <q-list bordered class="rounded-borders bg-accent" style="width: 60%">
       <q-item-label header>Positions List</q-item-label>
 
-      <PositionCard v-for="position in positions" :key="position.asset_id" :position="position" />
+      <PositionCard
+        v-for="position in positions"
+        :key="position.asset_id"
+        :position="position"
+        :orders="orders"
+      />
 <!--
       <q-item>
         <q-item-section avatar top>
@@ -81,10 +86,10 @@
 import PositionCard from 'src/components/PositionCard'
 
 export default {
-  props: ['positions'],
+  props: ['positions', 'orders'],
   components: { PositionCard },
   mounted () {
-    console.log('positions logged from PositionList.vue: ', this.positions)
+    console.log('orders logged from PositionList.vue: ', this.orders)
   }
 }
 </script>

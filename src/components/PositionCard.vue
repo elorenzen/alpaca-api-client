@@ -2,11 +2,13 @@
     <div>
       <q-item>
         <q-item-section avatar top>
-          <q-avatar color="primary" text-color="white">{{ position.symbol }}</q-avatar>
+          <q-avatar color="secondary" text-color="white">{{ position.symbol }}</q-avatar>
         </q-item-section>
 
         <q-item-section top class="col-2 gt-sm">
-          <q-item-label class="q-mt-sm">GitHub</q-item-label>
+          <q-item-label class="q-mt-sm">
+              ${{ position.market_value.replace(/\B(?=(\d{3})+(?!\d))/g, ',') }}
+          </q-item-label>
         </q-item-section>
 
         <q-item-section top>
@@ -26,6 +28,7 @@
         </q-item-section>
 
         <q-item-section top side>
+          <q-item-label caption>{{ position.qty.replace(/\B(?=(\d{3})+(?!\d))/g, ',') }} shares</q-item-label>
           <div class="text-grey-8 q-gutter-xs">
             <q-btn class="gt-xs" size="12px" flat dense round icon="delete" />
             <q-btn class="gt-xs" size="12px" flat dense round icon="done" />
@@ -34,15 +37,70 @@
         </q-item-section>
       </q-item>
 
+      <div class="q-px-lg">
+        <q-list padding class="row rounded-borders">
+            <q-expansion-item
+                class="col"
+                dense
+                dense-toggle
+                expand-separator
+                icon="perm_identity"
+                label="Account settings"
+            >
+                <q-card>
+                <q-card-section>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                </q-card-section>
+                </q-card>
+            </q-expansion-item>
+
+            <q-expansion-item
+                class="col"
+                dense
+                dense-toggle
+                expand-separator
+                icon="signal_wifi_off"
+                label="Order history"
+            >
+                {{ orders }}
+            </q-expansion-item>
+        </q-list>
+      </div>
+
       <q-separator spaced />
     </div>
 </template>
 
 <script>
+import { alpacaInstance } from 'boot/alpaca-api'
+import axios from 'axios'
+
 export default {
-  props: ['position'],
+  props: ['position', 'orders'],
+  data () {
+    return {
+      assetData: null,
+      rsiData: null
+    }
+  },
+  methods: {
+    async getAssetData () {
+      this.assetData = await alpacaInstance.getAsset(this.position.symbol)
+      console.log('assetData: ', this.assetData)
+    },
+    async getRSI () {
+      this.rsiData = await axios.get(
+        `https://www.alphavantage.co/query?function=RSI&symbol=${this.position.symbol}&interval=15min&time_period=5&series_type=open&apikey=${process.env.ALPHAVANTAGE_API_KEY}`
+      ).then((response) => {
+        console.log(response.data['Technical Analysis: RSI'])
+      })
+    }
+  },
   mounted () {
     console.log(this.position)
+
+    this.getAssetData()
+    this.getRSI()
   }
 }
 </script>
