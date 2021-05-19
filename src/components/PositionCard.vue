@@ -13,26 +13,19 @@
 
         <q-item-section top>
           <q-item-label lines="1">
-            <span class="text-weight-medium">[quasarframework/quasar]</span>
-            <span class="text-grey-8"> - GitHub repository</span>
+            <span class="text-weight-medium">Today's P/L($): {{ position.unrealized_intraday_pl }}</span>
+            <span class="text-grey-8"> ({{ position.unrealized_intraday_plpc }}%)</span>
           </q-item-label>
           <q-item-label caption lines="1">
-            @rstoenescu in #3: > Generic type parameter for props
-          </q-item-label>
-          <q-item-label
-            lines="1"
-            class="q-mt-xs text-body2 text-weight-bold text-primary text-uppercase"
-          >
-            <span class="cursor-pointer">Open in GitHub</span>
+            Total P/L($): {{ position.unrealized_pl }}
           </q-item-label>
         </q-item-section>
 
         <q-item-section top side>
           <q-item-label caption>{{ position.qty.replace(/\B(?=(\d{3})+(?!\d))/g, ',') }} shares</q-item-label>
-          <div class="text-grey-8 q-gutter-xs">
-            <q-btn class="gt-xs" size="12px" flat dense round icon="delete" />
-            <q-btn class="gt-xs" size="12px" flat dense round icon="done" />
-            <q-btn size="12px" flat dense round icon="more_vert" />
+          <div class="q-pa-sm q-gutter-xs">
+            <q-btn class="gt-xs" outline size="sm" label="buy" color="positive" />
+            <q-btn class="gt-xs" outline size="sm" label="sell" color="negative" />
           </div>
         </q-item-section>
       </q-item>
